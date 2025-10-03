@@ -1,10 +1,24 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
         <script src="https://cdn.jsdelivr.net/gh/kitao/pyxel/wasm/pyxel.js"></script>
     </head>
 
     <body>
         <pyxel-play root="." name="the-colors-development.pyxapp" packages="pygame-ce" gamepad="enabled"></pyxel-play>
+        
+        <script>
+            const REDIRECT_URL = "https://github.com/Python-yarouze/the-colors";
+            
+            // ESCキーの監視（フォールバック用）
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    setTimeout(function() {
+                        window.location.href = REDIRECT_URL;
+                    }, 100);
+                }
+            });
+        </script>
     </body>
 </html>
