@@ -60,3 +60,10 @@
 
 - セーブデータは 1 つのみ  
 - 保存データは **ブラウザのキャッシュ** で管理  
+
+## BGMについて
+
+音楽素材については以下のサイトのフリーBGMをお借りしています。
+
+- [イワシロ音楽素材](https://iwashiro-sounds.work/)
+- [MOMIZizm MUSiC（もみじば）](https://music.storyinvention.com/)
