@@ -9,16 +9,26 @@
         <pyxel-play root="." name="the-colors-development.pyxapp" packages="pygame-ce" gamepad="enabled"></pyxel-play>
         
         <script>
-            // ページ内のどこかをタップした時にオーディオを再開させる
-            window.addEventListener('touchstart', function() {
+            // 強制的にオーディオコンテキストを生成・再開する関数
+            function fixAudio() {
+                // SDLの有無に関わらず、ブラウザレベルでオーディオを「活動状態」にする
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                const tempCtx = new AudioContext();
+                if (tempCtx.state === 'suspended') {
+                    tempCtx.resume();
+                }
+
+                // SDLが存在する場合の処理
                 if (typeof SDL !== 'undefined' && SDL.audio && SDL.audio.context) {
                     if (SDL.audio.context.state === 'suspended') {
-                        SDL.audio.context.resume().then(() => {
-                            console.log('AudioContext resumed!');
-                        });
+                        SDL.audio.context.resume();
                     }
                 }
-            }, false);
+            }
+
+            // 2. ユーザーの最初のタッチ・クリックで実行（一度だけ）
+            window.addEventListener('touchstart', fixAudio, { once: true });
+            window.addEventListener('click', fixAudio, { once: true });
             
             const REDIRECT_URL = "https://github.com/Python-yarouze/the-colors";
             
