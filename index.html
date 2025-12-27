@@ -9,6 +9,17 @@
         <pyxel-play root="." name="the-colors-development.pyxapp" packages="pygame-ce" gamepad="enabled"></pyxel-play>
         
         <script>
+            // ページ内のどこかをタップした時にオーディオを再開させる
+            window.addEventListener('touchstart', function() {
+                if (typeof SDL !== 'undefined' && SDL.audio && SDL.audio.context) {
+                    if (SDL.audio.context.state === 'suspended') {
+                        SDL.audio.context.resume().then(() => {
+                            console.log('AudioContext resumed!');
+                        });
+                    }
+                }
+            }, false);
+            
             const REDIRECT_URL = "https://github.com/Python-yarouze/the-colors";
             
             // ESCキーの監視（フォールバック用）
